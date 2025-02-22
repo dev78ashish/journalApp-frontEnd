@@ -16,7 +16,7 @@ const LandingPage = () => {
               <span className="block text-indigo-600">transform your life</span>
             </h1>
             <p className="mt-6 text-base text-gray-500 sm:text-lg md:text-xl">
-              JournalMind helps you track your thoughts, mood patterns, and personal growth through intuitive journaling and powerful analytics.
+              JournalMind is your personal space for effortless journaling, helping you capture daily thoughts, reflect on experiences, and track your growth—all in one intuitive app.
             </p>
             <div className="mt-8 sm:flex sm:justify-center lg:justify-start">
               <div className="rounded-md shadow">
