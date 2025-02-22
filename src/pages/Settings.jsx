@@ -20,9 +20,15 @@ const Settings = ({ showAlert }) => {
     password: ""
   });
 
+
   const isPasswordMatch = newPassword === confirmPassword && newPassword.length > 0;
 
   const deleteUser = async () => {
+    if(userData.username==="demouser"){
+      setConfirmDelete(false);
+      showAlert("Demo users cannot delete their account.", "error");
+      return;
+    }
     try {
       setLoading(prev => ({ ...prev, delete: true }));
       const token = localStorage.getItem("token");
@@ -63,6 +69,10 @@ const Settings = ({ showAlert }) => {
 
   const emailUpdate = async (e) => {
     e.preventDefault();
+    if(userData.username==="demouser"){
+      showAlert("Demo users cannot update their email.", "error");
+      return;
+    }
     setErrors(prev => ({ ...prev, email: "" }));
     
     if (email === userData.email) {
@@ -99,6 +109,10 @@ const Settings = ({ showAlert }) => {
 
   const passwordUpdate = async (e) => {
     e.preventDefault();
+    if(userData.username==="demouser"){
+      showAlert("Demo users cannot update their email.", "error");
+      return;
+    }
     setErrors(prev => ({ ...prev, password: "" }));
 
     if (!isPasswordMatch) {

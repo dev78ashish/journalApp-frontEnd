@@ -24,7 +24,7 @@ function App() {
       {alert && <Alert message={alert.message} type={alert.type} onClose={() => setAlert(null)} />}
         <Navbar showAlert={showAlert}/>
         <Routes>
-          <Route path="/landingpage" element={<LandingPage />} />
+          <Route path="/landingpage" element={<LandingPage showAlert={showAlert} />} />
           <Route path="/login" element={<Login showAlert={showAlert} />} />
           <Route path="/signup" element={<Signup showAlert={showAlert} />} />
 

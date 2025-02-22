@@ -1,10 +1,57 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import bgimage from "../assets/image1.png";
-import { Clock, Edit, Smartphone } from "lucide-react";
+import { Clock, Edit, Smartphone, Loader2 } from "lucide-react";
 import image from "../assets/gne.png";
+import axios from "axios";
+import { useAuth } from "../contexts/AuthContext";
 
-const LandingPage = () => {
+const LandingPage = ({showAlert}) => {
+
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
+  const [credentials] = useState({ userName: "demouser", password: "demouser1" });
+  const {login} = useAuth();
+
+  const handleDemoLogin = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}/public/login`,
+        credentials,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      localStorage.setItem("token", response.data);
+      login();
+      showAlert("Login successful!", "success");
+      navigate("/");
+    } catch (error) {
+      console.error("Login failed:", error);
+      showAlert("Invalid credentials. Please try again.", "error");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const DemoButton = () => (
+    <button
+      onClick={handleDemoLogin}
+      disabled={isLoading}
+      className="w-full flex items-center justify-center px-8 py-3 border border-indigo-300 rounded-md text-base font-medium text-white bg-indigo-400 hover:bg-indigo-500 md:py-4 md:text-lg md:px-10 disabled:opacity-70 disabled:cursor-not-allowed"
+    >
+      {isLoading ? (
+        <>
+          <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+          Logging in...
+        </>
+      ) : (
+        "Try Demo"
+      )}
+    </button>
+  );
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
       {/* Hero Section */}
@@ -32,7 +79,7 @@ const LandingPage = () => {
             <p className="mt-6 text-base text-gray-500 sm:text-lg md:text-xl">
               JournalMind is your personal space for effortless journaling, helping you capture daily thoughts, reflect on experiences, and track your growth—all in one intuitive app.
             </p>
-            <div className="mt-8 sm:flex sm:justify-center lg:justify-start">
+            <div className="mt-8 sm:flex sm:justify-center lg:justify-start space-x-3">
               <div className="rounded-md shadow">
                 <Link
                   to="/signup"
@@ -41,13 +88,16 @@ const LandingPage = () => {
                   Get started
                 </Link>
               </div>
-              <div className="mt-3 sm:mt-0 sm:ml-3">
+              <div>
                 <Link
                   to="/login"
                   className="w-full flex items-center justify-center px-8 py-3 border border-gray-300 rounded-md text-base font-medium text-indigo-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10"
                 >
                   Log in
                 </Link>
+              </div>
+              <div>
+                <DemoButton />
               </div>
             </div>
           </div>
