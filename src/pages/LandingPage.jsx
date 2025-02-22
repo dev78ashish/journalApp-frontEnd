@@ -9,8 +9,22 @@ const LandingPage = () => {
     <div className="min-h-screen bg-gradient-to-b from-white to-blue-50">
       {/* Hero Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-24">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-8">
-          <div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 lg:gap-8">
+          {/* Image Section - Moved to top for mobile */}
+          <div className="order-1 lg:order-2 lg:col-span-6 lg:flex lg:items-center">
+            <div className="relative mx-auto w-full rounded-lg lg:max-w-md">
+              <div className="relative block w-full rounded-lg overflow-hidden">
+                <img
+                  src={bgimage}
+                  alt="Journal app interface preview"
+                  className="w-full"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Content Section */}
+          <div className="mt-8 lg:mt-0 order-2 lg:order-1 sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
             <h1 className="text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl md:text-6xl">
               <span className="block">Document your journey,</span>
               <span className="block text-indigo-600">transform your life</span>
@@ -34,23 +48,6 @@ const LandingPage = () => {
                 >
                   Log in
                 </Link>
-              </div>
-            </div>
-          </div>
-          <div className="mt-12 relative sm:max-w-lg sm:mx-auto lg:mt-0 lg:max-w-none lg:mx-0 lg:col-span-6 lg:flex lg:items-center">
-            <div className="relative mx-auto w-full rounded-lg lg:max-w-md">
-              <div className="relative block w-full rounded-lg overflow-hidden">
-                <img
-                  src={bgimage}
-                  alt="Journal app interface preview"
-                  className="w-full"
-                />
-                {/* <div className="absolute inset-0 w-full h-full flex items-center justify-center">
-                  <svg className="h-12 w-12 text-indigo-500" fill="currentColor" viewBox="0 0 84 84">
-                    <circle opacity="0.9" cx="42" cy="42" r="42" fill="white" />
-                    <path d="M55 42L35 55V29L55 42Z" />
-                  </svg>
-                </div> */}
               </div>
             </div>
           </div>
