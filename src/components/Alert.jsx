@@ -24,7 +24,7 @@ const Alert = ({ message, type, onClose }) => {
   };
 
   return (
-    <div className={`fixed top-5 right-5 p-4 rounded-lg shadow-lg ${getAlertStyles()} transition-transform transform animate-slideIn`}>
+    <div className={`fixed z-100 top-5 right-5 p-4 rounded-lg shadow-lg ${getAlertStyles()} transition-transform transform animate-slideIn`}>
       <span>{message}</span>
     </div>
   );
